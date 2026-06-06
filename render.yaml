@@ -3,13 +3,15 @@ services:
   - type: web
     name: weather-backend
     runtime: image
-    repo: https://github.com/ialuj/weather-app
+    repo: https://github.com/seu-usuario/weather-app
     branch: main
-    rootDir: weather-info-api
-    dockerfilePath: weather-info-api/Dockerfile
+    dockerfilePath: ./weather-info-api/Dockerfile
+    dockerContext: ./weather-info-api
     envVars:
       - key: WEATHER_API_KEY
-        sync: false
+        value: wai_3abc02.e6170c5e3b2e93879e3c9d031963dcd0b40187de44a1a170
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
     healthCheckPath: /api/weather/health
     ports:
       - port: 8080
@@ -19,13 +21,13 @@ services:
   - type: web
     name: weather-frontend
     runtime: image
-    repo: https://github.com/ialuj/weather-app
+    repo: https://github.com/seu-usuario/weather-app
     branch: main
-    rootDir: weather-info-frontend
-    dockerfilePath: weather-info-frontend/Dockerfile
+    dockerfilePath: ./weather-info-frontend/Dockerfile
+    dockerContext: ./weather-info-frontend
     envVars:
       - key: BACKEND_URL
-        value: https://weather-backend.onrender.com
+        value: https://weather-backend.onrender.com/api
     healthCheckPath: /
     ports:
       - port: 80
