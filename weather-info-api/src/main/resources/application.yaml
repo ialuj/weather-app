@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: weather-info-api
+  main:
+    banner-mode: off
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+weather:
+  api:
+    base-url: https://api.weather-ai.co/v1
+    key: ${WEATHER_API_KEY}
+
+logging:
+  level:
+    com.weather: DEBUG
+    org.springframework.web: INFO

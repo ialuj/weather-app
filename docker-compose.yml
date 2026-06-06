@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # Backend Spring Boot
+  backend:
+    build: ./weather-info-api
+    container_name: weather-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - WEATHER_API_KEY=${WEATHER_API_KEY}
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - weather-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/weather/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend Angular
+  frontend:
+    build: ./weather-info-frontend
+    container_name: weather-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - weather-network
+    environment:
+      - API_URL=http://backend:8080/api
+
+networks:
+  weather-network:
+    driver: bridge
