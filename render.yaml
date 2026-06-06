@@ -1,34 +1,22 @@
 services:
-  # Backend Service
   - type: web
     name: weather-backend
     runtime: image
-    repo: https://github.com/seu-usuario/weather-app
+    repo: https://github.com/ialuj/weather-app
     branch: main
-    dockerfilePath: ./weather-info-api/Dockerfile
-    dockerContext: ./weather-info-api
+    buildCommand: cd weather-info-api && ./mvnw clean package
+    startCommand: cd weather-info-api && java -jar target/*.jar
     envVars:
       - key: WEATHER_API_KEY
         value: wai_3abc02.e6170c5e3b2e93879e3c9d031963dcd0b40187de44a1a170
-      - key: SPRING_PROFILES_ACTIVE
-        value: prod
     healthCheckPath: /api/weather/health
-    ports:
-      - port: 8080
-        protocol: http
 
-  # Frontend Service
-  - type: web
+  - type: static
     name: weather-frontend
-    runtime: image
-    repo: https://github.com/seu-usuario/weather-app
+    repo: https://github.com/ialuj/weather-app
     branch: main
-    dockerfilePath: ./weather-info-frontend/Dockerfile
-    dockerContext: ./weather-info-frontend
+    buildCommand: cd weather-info-frontend && npm install && npm run build -- --configuration production
+    publishPath: weather-info-frontend/dist/weather-info-frontend/browser
     envVars:
       - key: BACKEND_URL
-        value: https://weather-backend.onrender.com/api
-    healthCheckPath: /
-    ports:
-      - port: 80
-        protocol: http
+        value: https://weather-backend.onrender.com/api/
