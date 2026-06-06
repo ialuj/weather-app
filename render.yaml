@@ -1,0 +1,32 @@
+services:
+  # Backend Service
+  - type: web
+    name: weather-backend
+    runtime: image
+    repo: https://github.com/ialuj/weather-app.git
+    branch: main
+    rootDir: weather-info-api
+    dockerfilePath: weather-info-api/Dockerfile
+    envVars:
+      - key: WEATHER_API_KEY
+        sync: false
+    healthCheckPath: /api/weather/health
+    ports:
+      - port: 8080
+        protocol: http
+
+  # Frontend Service
+  - type: web
+    name: weather-frontend
+    runtime: image
+    repo: https://github.com/ialuj/weather-app.git
+    branch: main
+    rootDir: weather-info-frontend
+    dockerfilePath: weather-info-frontend/Dockerfile
+    envVars:
+      - key: BACKEND_URL
+        value: https://weather-backend.onrender.com
+    healthCheckPath: /
+    ports:
+      - port: 80
+        protocol: http
