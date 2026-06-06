@@ -249,6 +249,8 @@ git add README.md
 git commit -m "Add comprehensive README with setup instructions"
 git push origin develop
 
+Live app url: https://weather-app-eta-two-9gv21m3g2m.vercel.app/
+
 See more about the amazing Weather AI API at: https://weather-ai.co/
 
 ````
