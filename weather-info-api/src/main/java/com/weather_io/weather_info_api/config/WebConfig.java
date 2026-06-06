@@ -13,7 +13,10 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                         "http://localhost:4200",
                         "http://localhost:4201",
-                        "http://127.0.0.1:4200"
+                        "http://127.0.0.1:4200",
+                        "https://weather-app-eta-two-9gv21m3g2m.vercel.app",
+                        "weather-app-eta-two-9gv21m3g2m.vercel.app",
+                        "www.weather-app-eta-two-9gv21m3g2m.vercel.app"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
