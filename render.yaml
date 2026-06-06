@@ -3,7 +3,7 @@ services:
   - type: web
     name: weather-backend
     runtime: image
-    repo: https://github.com/ialuj/weather-app.git
+    repo: https://github.com/ialuj/weather-app
     branch: main
     rootDir: weather-info-api
     dockerfilePath: weather-info-api/Dockerfile
@@ -19,7 +19,7 @@ services:
   - type: web
     name: weather-frontend
     runtime: image
-    repo: https://github.com/ialuj/weather-app.git
+    repo: https://github.com/ialuj/weather-app
     branch: main
     rootDir: weather-info-frontend
     dockerfilePath: weather-info-frontend/Dockerfile
