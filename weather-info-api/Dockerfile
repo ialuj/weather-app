@@ -17,12 +17,13 @@ WORKDIR /app
 # Copiar o JAR do estágio de build
 COPY --from=build /app/target/*.jar app.jar
 
-# Expor a porta do backend
-EXPOSE 8080
+# Expor a porta 80 (padrão HTTP para o SnapDeploy)
+EXPOSE 80
 
-# Variáveis de ambiente (serão sobrescritas pelo docker-compose)
-ENV WEATHER_API_KEY=""
+# Variáveis de ambiente
+ENV WEATHER_API_KEY=wai_3abc02.e6170c5e3b2e93879e3c9d031963dcd0b40187de44a1a170
 ENV SPRING_PROFILES_ACTIVE=prod
+ENV SERVER_PORT=80
 
 # Comando para rodar a aplicação
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "-DSERVER_PORT=80", "app.jar"]
