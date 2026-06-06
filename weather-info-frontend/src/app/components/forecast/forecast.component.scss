@@ -1,0 +1,139 @@
+.forecast-container {
+  margin-top: 32px;
+  padding: 24px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  h3 {
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    color: #1a1a2e;
+  }
+
+  .forecast-list-horizontal {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 8px 4px 16px 4px;
+
+    // Scrollbar styling
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #00b4d8;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #0077b6;
+    }
+  }
+
+  .forecast-card {
+    flex: 0 0 auto;
+    min-width: 140px;
+    text-align: center;
+    padding: 20px 16px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    }
+
+    .forecast-date {
+      margin-bottom: 16px;
+
+      .weekday {
+        font-weight: 700;
+        font-size: 16px;
+        color: #1a1a2e;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .full-date {
+        font-size: 11px;
+        color: #6c757d;
+        margin-top: 4px;
+      }
+    }
+
+    .forecast-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .forecast-temp {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px;
+
+      .max-temp {
+        font-weight: 800;
+        font-size: 20px;
+        color: #e63946;
+      }
+
+      .min-temp {
+        font-weight: 500;
+        font-size: 16px;
+        color: #457b9d;
+      }
+    }
+
+    .forecast-condition {
+      font-size: 12px;
+      color: #6c757d;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+  }
+}
+
+.no-forecast {
+  margin-top: 24px;
+  padding: 32px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  color: #6c757d;
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .forecast-container {
+    padding: 16px;
+
+    .forecast-card {
+      min-width: 120px;
+      padding: 16px 12px;
+
+      .forecast-icon {
+        font-size: 36px;
+      }
+
+      .forecast-temp {
+        .max-temp {
+          font-size: 18px;
+        }
+        .min-temp {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

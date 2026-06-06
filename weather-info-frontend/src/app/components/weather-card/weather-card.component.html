@@ -1,0 +1,74 @@
+<div class="weather-card" [ngClass]="weatherClass" *ngIf="weather">
+  <div class="card-header">
+    <h2>{{ weather?.city }}</h2>
+    <div class="weather-icon">{{ weatherIcon }}</div>
+  </div>
+
+  <div class="temperature">
+    <span class="temp-value">{{
+      weather?.current?.temperature | number : "1.0-0"
+    }}</span>
+    <span class="temp-unit">°C</span>
+  </div>
+
+  <div class="condition">
+    {{ weather?.current?.condition || "Not available" }}
+  </div>
+
+  <div class="ai-recommendation">
+    <div class="ai-icon">🤖</div>
+    <div class="ai-text">
+      <p class="summary">{{ weather?.aiSummary?.text }}</p>
+      <p class="recommendation">{{ weather?.aiSummary?.recommendation }}</p>
+    </div>
+  </div>
+
+  <div
+    class="forecast-wrapper"
+    *ngIf="weather.forecast && weather.forecast.length > 0"
+  >
+    <app-forecast [forecast]="weather.forecast" [units]="units"></app-forecast>
+  </div>
+
+  <!--<div
+    class="forecast-section"
+    *ngIf="weather.forecast && weather.forecast.length > 0"
+  >
+    <div class="forecast-title">
+      📅 {{ weather.forecast.length }}-Day Forecast
+    </div>
+    <div class="forecast-mini-list">
+      <div *ngFor="let day of weather.forecast" class="forecast-mini-item">
+        <div class="forecast-mini-date">{{ formatShortDate(day.date) }}</div>
+        <div class="forecast-mini-icon">
+          {{ getWeatherIcon(day.condition) }}
+        </div>
+        <div class="forecast-mini-temp">
+          <span class="forecast-high">{{ formatTemp(day.maxTemp) }}</span>
+          <span class="forecast-low">{{ formatTemp(day.minTemp) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>-->
+
+  <div class="details">
+    <div class="detail">
+      <span class="detail-icon">💧</span>
+      <span>{{ weather?.current?.humidity }}%</span>
+    </div>
+    <div class="detail">
+      <span class="detail-icon">🌬️</span>
+      <span>{{ weather?.current?.windKph }} km/h</span>
+    </div>
+    <div class="detail">
+      <span class="detail-icon">🌡️</span>
+      <span
+        >Feels like {{ weather?.current?.feelsLike | number : "1.0-0" }}°</span
+      >
+    </div>
+  </div>
+
+  <div class="timestamp">
+    Updated: {{ weather?.timestamp | date : "short" }}
+  </div>
+</div>

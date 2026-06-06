@@ -1,0 +1,22 @@
+<div class="forecast-container" *ngIf="forecast && forecast.length > 0">
+  <h3>📅 {{ forecast.length }}-Day Forecast</h3>
+
+  <div class="forecast-list-horizontal">
+    <div *ngFor="let day of forecast" class="forecast-card">
+      <div class="forecast-date">
+        <div class="weekday">{{ formatWeekday(day.date) }}</div>
+        <div class="full-date">{{ formatFullDate(day.date) }}</div>
+      </div>
+      <div class="forecast-icon">{{ getWeatherIcon(day.condition) }}</div>
+      <div class="forecast-temp">
+        <span class="max-temp">{{ formatTemp(day.maxTemp) }}</span>
+        <span class="min-temp">{{ formatTemp(day.minTemp) }}</span>
+      </div>
+      <div class="forecast-condition">{{ day.condition }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="no-forecast" *ngIf="!forecast || forecast.length === 0">
+  <p>📊 Extended forecast will appear here when available</p>
+</div>

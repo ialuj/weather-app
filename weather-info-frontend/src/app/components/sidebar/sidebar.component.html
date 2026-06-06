@@ -1,0 +1,37 @@
+<div class="sidebar">
+  <div class="logo">
+    <span class="icon">🌤️</span>
+    <h2>Weather<span>AI</span></h2>
+  </div>
+
+  <nav>
+    <button
+      [class.active]="activeMenu === 'cities'"
+      (click)="setActive('cities')"
+    >
+      <span class="nav-icon">🏙️</span>
+      <span>Cities</span>
+    </button>
+
+    <button
+      [class.active]="activeMenu === 'location'"
+      (click)="setActive('location')"
+    >
+      <span class="nav-icon">📍</span>
+      <span>Current Location</span>
+    </button>
+
+    <button
+      [class.active]="activeMenu === 'others'"
+      (click)="setActive('others')"
+    >
+      <span class="nav-icon">📊</span>
+      <span>Others</span>
+    </button>
+  </nav>
+
+  <div class="footer">
+    <p>Weather-AI</p>
+    <small>Powered by AI</small>
+  </div>
+</div>

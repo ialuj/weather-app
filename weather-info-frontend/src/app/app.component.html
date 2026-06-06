@@ -1,0 +1,137 @@
+<div class="app-container">
+  <app-sidebar (menuChange)="onMenuChange($event)"></app-sidebar>
+
+  <div class="main-content">
+    <div class="content-wrapper">
+      <!-- Cities View -->
+      <div *ngIf="activeMenu === 'cities'" class="view">
+        <app-card-list (citySelected)="onCitySelected($event)"></app-card-list>
+
+        <div class="weather-display" *ngIf="currentWeather">
+          <app-weather-card [weather]="currentWeather"></app-weather-card>
+        </div>
+
+        <div class="welcome-message" *ngIf="!currentWeather">
+          <div class="welcome-icon">🌍</div>
+          <h2>Welcome to WeatherAI</h2>
+          <p>
+            Select a city from the list to see current weather and AI
+            recommendations
+          </p>
+        </div>
+      </div>
+
+      <!-- Current Location View -->
+      <div *ngIf="activeMenu === 'location'" class="view">
+        <div class="location-header">
+          <h2>📍 Your Current Location</h2>
+          <button
+            (click)="getLocationWeather()"
+            class="refresh-btn"
+            [disabled]="loading"
+          >
+            🔄 Refresh
+          </button>
+        </div>
+
+        <!-- Location Filters -->
+        <div class="filters-section" *ngIf="!loading">
+          <div class="filter-group">
+            <label>📅 Days:</label>
+            <select
+              [(ngModel)]="locationDays"
+              (change)="onLocationFiltersChange()"
+            >
+              <option [value]="1">1 day</option>
+              <option [value]="3">3 days</option>
+              <option [value]="5">5 days</option>
+              <option [value]="7">7 days</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>🤖 AI Summary:</label>
+            <select
+              [(ngModel)]="locationAI"
+              (change)="onLocationFiltersChange()"
+            >
+              <option [value]="true">Enabled</option>
+              <option [value]="false">Disabled</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>🌡️ Units:</label>
+            <select
+              [(ngModel)]="locationUnits"
+              (change)="onLocationFiltersChange()"
+            >
+              <option value="metric">Metric (°C)</option>
+              <option value="imperial">Imperial (°F)</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>🌐 Language:</label>
+            <select
+              [(ngModel)]="locationLang"
+              (change)="onLocationFiltersChange()"
+            >
+              <option value="en">English</option>
+              <option value="pt">Portuguese</option>
+              <option value="fr">French</option>
+              <option value="sw">Swahili</option>
+              <option value="ar">Arabic</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>🌐 Weather Type:</label>
+            <select
+              [(ngModel)]="weatherType"
+              (change)="onLocationFiltersChange()"
+            >
+              <option value="weather">Weather</option>
+              <option value="forecast">Forecast</option>
+              <option value="current">Current</option>
+              <option value="daily">Daily</option>
+              <option value="hourly">Hourly</option>
+            </select>
+          </div>
+        </div>
+
+        <div *ngIf="loading" class="loading-state">
+          <div class="spinner"></div>
+          <p>Getting your location weather...</p>
+        </div>
+
+        <div *ngIf="errorMessage" class="error-state">
+          <div class="error-icon">⚠️</div>
+          <p>{{ errorMessage }}</p>
+          <small
+            >Please allow location access or select a city from the menu</small
+          >
+        </div>
+
+        <div *ngIf="currentWeather && !loading && activeMenu === 'location'">
+          <app-weather-card [weather]="currentWeather"></app-weather-card>
+        </div>
+      </div>
+
+      <!-- Others View -->
+      <div *ngIf="activeMenu === 'others'" class="view">
+        <div class="others-container">
+          <div class="coming-soon">
+            <div class="coming-icon">🚧</div>
+            <h2>Coming Soon</h2>
+            <p>Hourly and daily forecast features are in development.</p>
+            <small
+              >This feature will be available with the Pro version of Weather-AI
+              API.</small
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
