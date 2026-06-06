@@ -64,6 +64,17 @@ export class AppComponent {
     if (this.lastCoords && this.activeMenu === 'location') {
       this.fetchWeatherByCoords(this.lastCoords.lat, this.lastCoords.lon);
     }
+    console.log('Filters:', {
+      days: this.locationDays,
+      ai: this.locationAI,
+      units: this.locationUnits,
+      lang: this.locationLang,
+      weatherType: this.weatherType,
+    });
+
+    this.loading = true;
+
+    this.getLocationWeather();
   }
 
   getLocationWeather() {
