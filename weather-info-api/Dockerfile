@@ -19,7 +19,9 @@ COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
 
-ENV SERVER_PORT=80
+# IMPORTANTE: Render injeta a variável PORT
+ENV SERVER_PORT=${PORT}
+
 ENV SPRING_PROFILES_ACTIVE=prod
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["sh", "-c", "java -jar app.jar --server.port=$PORT"]
