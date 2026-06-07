@@ -1,4 +1,3 @@
-# Estágio 1: Build
 FROM maven:3.9-eclipse-temurin-17 AS build
 
 WORKDIR /app
@@ -10,7 +9,6 @@ COPY src ./src
 
 RUN mvn clean package -DskipTests
 
-# Estágio 2: Runtime
 FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
@@ -19,9 +17,6 @@ COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
 
-# IMPORTANTE: Render injeta a variável PORT
-ENV SERVER_PORT=${PORT}
-
 ENV SPRING_PROFILES_ACTIVE=prod
 
-ENTRYPOINT ["sh", "-c", "java -jar app.jar --server.port=$PORT"]
+ENTRYPOINT ["sh", "-c", "java -jar app.jar --server.port=${PORT:-8080}"]
