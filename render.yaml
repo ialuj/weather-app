@@ -13,7 +13,7 @@ services:
         value: wai_3abc02.e6170c5e3b2e93879e3c9d031963dcd0b40187de44a1a170
       - key: SPRING_PROFILES_ACTIVE
         value: prod
-    healthCheckPath: /api/weather/health
+    healthCheckPath: /v1/weather/health
 
   # Frontend Service
   - type: web
@@ -26,5 +26,5 @@ services:
     dockerContext: weather-info-frontend
     envVars:
       - key: BACKEND_URL
-        value: https://weather-backend.onrender.com/api/weather
+        value: https://weather-backend.onrender.com/api
     healthCheckPath: /
