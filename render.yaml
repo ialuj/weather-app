@@ -4,14 +4,17 @@ services:
     runtime: docker
     repo: https://github.com/ialuj/weather-app
     branch: develop
+
     rootDir: weather-info-api
-    dockerfilePath: weather-info-api/Dockerfile
-    dockerContext: weather-info-api
+    dockerfilePath: Dockerfile
+    dockerContext: .
+
     envVars:
       - key: WEATHER_API_KEY
         value: wai_3abc02.e6170c5e3b2e93879e3c9d031963dcd0b40187de44a1a170
       - key: SPRING_PROFILES_ACTIVE
         value: prod
+
     healthCheckPath: /v1/weather/health
 
   - type: web
@@ -19,10 +22,13 @@ services:
     runtime: docker
     repo: https://github.com/ialuj/weather-app
     branch: develop
+
     rootDir: weather-info-frontend
-    dockerfilePath: weather-info-frontend/Dockerfile
-    dockerContext: weather-info-frontend
+    dockerfilePath: Dockerfile
+    dockerContext: .
+
     envVars:
       - key: BACKEND_URL
         value: https://weather-backend.onrender.com/api
+
     healthCheckPath: /
