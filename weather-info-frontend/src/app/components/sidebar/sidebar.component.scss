@@ -1,5 +1,5 @@
 .sidebar {
-  width: 260px;
+  width: 280px;
   height: 100vh;
   background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
   color: white;
@@ -8,7 +8,14 @@
   position: fixed;
   left: 0;
   top: 0;
-  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.2);
+
+  /* Overlay para mobile */
+  &::after {
+    display: none;
+  }
 
   .logo {
     padding: 32px 24px;
@@ -17,12 +24,14 @@
     .icon {
       font-size: 32px;
     }
+
     h2 {
-      margin: 8px 0 0;
+      margin: 12px 0 0;
       font-size: 24px;
+      font-weight: 700;
 
       span {
-        color: #00b4d8;
+        color: var(--primary);
       }
     }
   }
@@ -40,8 +49,9 @@
       border-radius: 12px;
       color: rgba(255, 255, 255, 0.7);
       font-size: 16px;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: var(--transition);
       text-align: left;
       display: flex;
       align-items: center;
@@ -51,13 +61,21 @@
         font-size: 22px;
       }
 
+      span:last-child {
+        flex: 1;
+      }
+
       &:hover {
         background: rgba(255, 255, 255, 0.1);
         color: white;
       }
 
       &.active {
-        background: linear-gradient(135deg, #00b4d8, #0077b6);
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
         color: white;
         box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3);
       }
@@ -69,11 +87,106 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 12px;
     text-align: center;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.4);
 
     p {
-      margin: 0 0 4px;
-      font-weight: 600;
+      margin-bottom: 4px;
     }
+  }
+
+  /* Botão toggle mobile */
+  .sidebar-toggle {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: -50px;
+    width: 44px;
+    height: 44px;
+    background: var(--primary);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    z-index: 1001;
+    transition: var(--transition);
+
+    &:hover {
+      background: var(--primary-dark);
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+/* Desktop: sidebar sempre visível */
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(0) !important;
+  }
+
+  .main-content {
+    margin-left: 280px;
+  }
+}
+
+/* Tablet (769px - 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .sidebar {
+    width: 260px;
+  }
+
+  .main-content {
+    margin-left: 260px;
+  }
+}
+
+/* Mobile: sidebar oculta por padrão, abre com toggle */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: 280px;
+    box-shadow: none;
+
+    &.open {
+      transform: translateX(0);
+      box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+
+    &.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    max-width: 280px;
   }
 }

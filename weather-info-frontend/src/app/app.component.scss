@@ -6,8 +6,8 @@
 
 .main-content {
   flex: 1;
-  margin-left: 260px;
   min-height: 100vh;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   .content-wrapper {
     padding: 40px;
@@ -16,143 +16,81 @@
   }
 }
 
+/* Desktop */
+@media (min-width: 1025px) {
+  .main-content {
+    margin-left: 280px;
+
+    .content-wrapper {
+      padding: 40px;
+    }
+  }
+}
+
+/* Tablet */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .main-content {
+    margin-left: 260px;
+
+    .content-wrapper {
+      padding: 30px;
+    }
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+
+    .content-wrapper {
+      padding: 20px 16px;
+    }
+  }
+}
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+  .main-content {
+    .content-wrapper {
+      padding: 16px 12px;
+    }
+  }
+}
+
 .view {
   animation: fadeIn 0.5s ease;
 }
 
-.location-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-
-  h2 {
-    margin: 0;
-    color: #1a1a2e;
-  }
-
-  .refresh-btn {
-    padding: 10px 24px;
-    background: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-weight: 500;
-
-    &:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-  }
-}
-
-.welcome-message,
-.loading-state,
-.error-state {
+/* Welcome message */
+.welcome-message {
   text-align: center;
   padding: 60px 20px;
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 32px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
+  margin-top: 20px;
 
-  .welcome-icon,
-  .error-icon,
-  .coming-icon {
+  .welcome-icon {
     font-size: 64px;
     margin-bottom: 20px;
   }
 
   h2 {
-    margin: 0 0 16px;
-    color: #1a1a2e;
+    margin-bottom: 16px;
+    color: var(--secondary);
+    font-size: clamp(24px, 5vw, 32px);
   }
 
   p {
-    color: #666;
-    margin-bottom: 16px;
-  }
-
-  small {
-    color: #999;
+    color: var(--text-light);
+    font-size: clamp(14px, 4vw, 16px);
+    max-width: 500px;
+    margin: 0 auto;
   }
 }
 
-.loading-state {
-  .spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #00b4d8;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 20px;
-  }
-}
-
-.others-container {
-  .coming-soon {
-    text-align: center;
-    padding: 80px 20px;
-    background: white;
-    border-radius: 32px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  }
-}
-
-// Filters section for location view
-.filters-section {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 24px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-
-  .filter-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-
-    label {
-      font-size: 13px;
-      font-weight: 600;
-      color: #1a1a2e;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    select {
-      padding: 10px 12px;
-      border: 2px solid #e0e0e0;
-      border-radius: 12px;
-      background: white;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-
-      &:hover {
-        border-color: #00b4d8;
-      }
-
-      &:focus {
-        outline: none;
-        border-color: #00b4d8;
-        box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.1);
-      }
-    }
-  }
-}
-
-// Location header adjustment
+/* Location header */
 .location-header {
   display: flex;
   justify-content: space-between;
@@ -163,19 +101,21 @@
 
   h2 {
     margin: 0;
-    color: #1a1a2e;
+    color: var(--secondary);
+    font-size: clamp(20px, 5vw, 28px);
   }
 
   .refresh-btn {
     padding: 12px 28px;
-    background: linear-gradient(135deg, #00b4d8, #0077b6);
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     color: white;
     border: none;
     border-radius: 12px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: var(--transition);
+    white-space: nowrap;
 
     &:hover:not(:disabled) {
       transform: translateY(-2px);
@@ -189,20 +129,80 @@
   }
 }
 
-// Responsive
+/* Mobile location header */
 @media (max-width: 768px) {
-  .filters-section {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
   .location-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
 
     .refresh-btn {
       width: 100%;
       text-align: center;
+    }
+  }
+}
+
+/* Loading e error states */
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 32px;
+  box-shadow: var(--shadow);
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+  }
+
+  .error-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  p {
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+
+  small {
+    color: #999;
+    font-size: 12px;
+  }
+}
+
+/* Others view */
+.others-container {
+  .coming-soon {
+    text-align: center;
+    padding: 80px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 32px;
+    box-shadow: var(--shadow);
+
+    .coming-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      color: var(--secondary);
+    }
+
+    p {
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+
+    small {
+      color: #999;
     }
   }
 }
@@ -219,20 +219,7 @@
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
+  to {
     transform: rotate(360deg);
-  }
-}
-
-@media (max-width: 768px) {
-  .main-content {
-    margin-left: 0;
-
-    .content-wrapper {
-      padding: 20px;
-    }
   }
 }
