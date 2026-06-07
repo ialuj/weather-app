@@ -4,8 +4,7 @@ services:
     runtime: docker
     repo: https://github.com/ialuj/weather-app
     branch: develop
-
-    dockerfilePath: weather-info-api/Dockerfile
+    rootDir: weather-info-api
     dockerContext: weather-info-api
 
     envVars:
@@ -21,8 +20,7 @@ services:
     runtime: docker
     repo: https://github.com/ialuj/weather-app
     branch: develop
-
-    dockerfilePath: weather-info-frontend/Dockerfile
+    rootDir: weather-info-frontend
     dockerContext: weather-info-frontend
 
     envVars:
