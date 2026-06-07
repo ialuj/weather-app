@@ -207,6 +207,51 @@
   }
 }
 
+.filters-section {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    select {
+      padding: 10px 12px;
+      border: 1px solid #dee2e6;
+      border-radius: 10px;
+      background: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+
+      &:hover {
+        border-color: var(--primary);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.1);
+      }
+    }
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
