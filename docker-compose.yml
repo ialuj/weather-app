@@ -6,7 +6,7 @@ services:
     build: ./weather-info-api
     container_name: weather-backend
     ports:
-      - "8080:8080"
+      - "8080:80"
     environment:
       - WEATHER_API_KEY=${WEATHER_API_KEY}
       - SPRING_PROFILES_ACTIVE=docker
